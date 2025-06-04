@@ -72,6 +72,6 @@ class TestTextNode(unittest.TestCase):
         parent_node = ParentNode("div", [child1, child2, child3, child4])
         expected_html = "<div><span>child1</span><span>child2</span><span>child3</span><div><span>child4</span></div></div>"
         self.assertEqual(parent_node.to_html(), expected_html)
-    
+     
 if __name__ == "__main__":
     unittest.main()
