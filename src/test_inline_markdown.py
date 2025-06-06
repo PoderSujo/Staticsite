@@ -278,7 +278,17 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             nodes,
         )
-
+    def test_text_to_textnodes_two(self):
+        text = "Here's the deal, **I like Tolkien**."
+        nodes = text_to_textnodes(text)
+        self.assertListEqual(
+            nodes,
+            [
+                TextNode("Here's the deal, ", TextType.TEXT),
+                TextNode("I like Tolkien", TextType.BOLD),
+                TextNode(".", TextType.TEXT)
+            ]
+        )
 
 
 

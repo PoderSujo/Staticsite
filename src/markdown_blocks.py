@@ -30,7 +30,7 @@ def block_to_block_type(block):
         return BlockType.HEADING
     elif lines[0].startswith("```") and lines[-1].endswith("```"):
         return BlockType.CODE
-    elif all(line.startswith("> ") for line in lines):
+    elif all(line.startswith(">") or line == "" for line in lines):
         return BlockType.QUOTE
     elif all(re.match(r'^\s*-\s', line) for line in lines):
         return BlockType.U_LIST
@@ -79,7 +79,7 @@ def markdown_to_html_node(markdown):
             html_nodes.append(ParentNode("pre", [LeafNode("code", code_content)]))
         elif block_type == BlockType.QUOTE:
             quote_content = "\n".join(line[2:] for line in block.split("\n"))
-            html_nodes.append(ParentNode("blockquote", [ParentNode("p", list(map(text_node_to_html_node, text_to_textnodes(quote_content))))]))
+            html_nodes.append(ParentNode("blockquote",list(map(text_node_to_html_node, text_to_textnodes(quote_content)))))
         elif block_type == BlockType.U_LIST:
             items = [ParentNode("li", list(map(text_node_to_html_node, text_to_textnodes(item[2:])))) for item in block.split("\n") if item.startswith("-")]
             html_nodes.append(ParentNode("ul", items))

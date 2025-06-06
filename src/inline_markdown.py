@@ -11,9 +11,9 @@ def has_valid_markdown_syntax(text):
     Returns:
         bool: True if the text has valid Markdown syntax, False otherwise.
     """
-    bold = re.search(r'\*\*[^\*n]+\*\*', text)
-    italic = re.search(r'_[^_\n]+_', text)
-    code = re.search(r'`[^`\n]+`', text)
+    bold = re.search(r'\*\*([^\n]+?)\*\*', text)
+    italic = re.search(r'_([^\n]+?)_', text)
+    code = re.search(r'`([^\n]+?)`', text)
     if bold or italic or code:
         return True
     return False 
